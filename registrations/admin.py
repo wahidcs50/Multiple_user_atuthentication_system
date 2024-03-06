@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from .models import Students
+from .models import User
 
 
 class StudentCreationForm(forms.ModelForm):
@@ -17,7 +17,7 @@ class StudentCreationForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Students
+        model = User
         fields = ["email", "first_name", "last_name"]
 
     def clean_password2(self):
@@ -46,7 +46,7 @@ class StudentChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = Students
+        model = User
         fields = ["email", "password", "is_active"]
 
 
@@ -58,8 +58,10 @@ class StudentAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ["email", "first_name", "last_name", "is_active"]
-    list_filter = ["is_staff"]
+    list_display = ["email", "first_name", "last_name", "is_active","is_staff", 
+                    "is_superuser",'is_admin','is_student','is_alumni'
+                    ]
+    list_filter = ["is_staff", "is_superuser","is_admin"]
     fieldsets = [
         (None, {"fields": ["email", "password"]}),
         ("Personal info", {"fields": ["first_name", "last_name"]}),
@@ -72,7 +74,7 @@ class StudentAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ["wide"],
-                "fields": ["email", "password1", "password2"],
+                "fields": ["email", "password1", "password2", 'is_student', 'is_alumni'],
             },
         ),
     ]
@@ -82,7 +84,7 @@ class StudentAdmin(BaseUserAdmin):
 
 
 # Now register the new UserAdmin...
-admin.site.register(Students, StudentAdmin)
+admin.site.register(User, StudentAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
