@@ -162,33 +162,35 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL':True,
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': '/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'TOKEN_MODEL': None,
       'SERIALIZERS':{
-        'user_create': 'registrations.serializer.UserCreateSerializer',
-        'user': 'registrations.serializer.UserCreateSerializer',
+        'user_create': 'registrations.serializer.CustomUserCreateSerializer',
+        'user': 'registrations.serializer.CustomUserCreateSerializer',
+        'current_user': 'registrations.serializer.CustomUserCreateSerializer',
         'user_delete': 'djoser.serializer.UserDeleteSerializer',
     },
-    'EMAIL': {},
+    'EMAIL': {
+         'activation': 'djoser.email.ActivationEmail',
+        },
 }
 
 #Email settings
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'noreply2thismail24@gmail.com'
-EMAIL_HOST_PASSWORD = 'qpln mpyl qqfy poam'
-DEFAULT_FROM_EMAIL = 'noreply2thismail24@gmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'noreply2thismail24@gmail.com'
+# EMAIL_HOST_PASSWORD = 'qpln mpyl qqfy poam'
+# DEFAULT_FROM_EMAIL = 'noreply2thismail24@gmail.com'
 
-ACCOUNT_EMAIL_REQUIRED=True
-ACCOUNT_AUTHENTICATION_METHOD="email"
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+# ACCOUNT_EMAIL_REQUIRED=True
+# ACCOUNT_AUTHENTICATION_METHOD="email"
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 # LOGIN_REDIRECT_URL="/"
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -212,3 +214,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # my custom students model
 
 AUTH_USER_MODEL = "registrations.User"
+import os
+
+print("DEBUG:", DEBUG)
+print("SECRET_KEY:", SECRET_KEY)
+# Add more debug statements for other settings...
