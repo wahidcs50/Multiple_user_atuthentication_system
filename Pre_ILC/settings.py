@@ -214,8 +214,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # my custom students model
 
 AUTH_USER_MODEL = "registrations.User"
-import os
+# import os
 
-print("DEBUG:", DEBUG)
-print("SECRET_KEY:", SECRET_KEY)
+# print("DEBUG:", DEBUG)
+# print("SECRET_KEY:", SECRET_KEY)
 # Add more debug statements for other settings...
