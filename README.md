@@ -18,13 +18,13 @@ This project showcases the following features:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/your-repo.git
+    git clone https://github.com/monly98/Multiple_user_atuthentication_system.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd your-repo
+    cd Multiple_user_atuthentication_system
     ```
 
 3. Install dependencies using pip:
